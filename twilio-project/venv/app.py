@@ -1,4 +1,3 @@
-# app.py
 from flask import Flask, request
 from twilio.twiml.voice_response import VoiceResponse
 
@@ -8,9 +7,22 @@ app = Flask(__name__)
 @app.route("/incoming-call", methods=['POST'])
 def incoming_call():
     response = VoiceResponse()
-    response.say("Hello! Thank you for calling. We will connect you shortly.")
-    # Additional call handling (e.g., forwarding to another number) can go here
+    response.say("Hello, welcome to the Healthcare Software Engineering Twilio test. This call is for testing purposes. Please leave a message after the beep.")
+    # Record the caller's message and transcribe it
+    response.record(transcribe=True, transcribe_callback="/transcription")
     return str(response)
+
+# Endpoint to receive transcription
+@app.route("/transcription", methods=['POST'])
+def transcription():
+    transcription_text = request.form['TranscriptionText']
+    print("Transcription received:", transcription_text)
+    
+    # Save the transcription to a text file
+    with open("transcriptions.txt", "a") as f:
+        f.write(transcription_text + "\n")
+    
+    return "Transcription received", 200
 
 # Start the Flask app
 if __name__ == "__main__":
