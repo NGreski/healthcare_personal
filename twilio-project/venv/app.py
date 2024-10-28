@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route("/incoming-call", methods=['POST'])
 def incoming_call():
     response = VoiceResponse()
-    response.say("Hello, welcome to the Healthcare Software Engineering Twilio test. This call is for testing purposes. Please leave a message after the beep.")
+    response.say("Hello class, welcome to Sprint Presentation 2 from the Healthcare team. This is a test. Please leave a message after the beep.")
     # Record the caller's message and transcribe it
     response.record(transcribe=True, transcribe_callback="/transcription")
     return str(response)
