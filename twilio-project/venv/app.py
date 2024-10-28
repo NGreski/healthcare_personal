@@ -19,7 +19,7 @@ def transcription():
     print("Transcription received:", transcription_text)
     
     # Save the transcription to a text file
-    with open("transcriptions.txt", "a") as f:
+    with open("transcriptions-test.txt", "a") as f:
         f.write(transcription_text + "\n")
     
     return "Transcription received", 200
